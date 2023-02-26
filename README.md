@@ -78,7 +78,7 @@
   
 ### Structures
 * app directory <br />
- Route Initation
+ Route Initiation
   ```sh
   app/app-routes
   ```
