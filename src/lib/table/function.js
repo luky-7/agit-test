@@ -3,10 +3,6 @@ function convertType(value) {
     return value.toString()
   }
 
-  if (isDateString(value)) {
-    return value.substr(6, 4) + value.substr(3, 2) + value.substr(0, 2)
-  }
-
   if (typeof value === 'boolean') {
     return value ? '1' : '-1'
   }
@@ -59,10 +55,4 @@ export function sortRows(rows, sort) {
 
 export function paginateRows(sortedRows, activePage, rowsPerPage) {
   return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)
-}
-
-function isDateString(value) {
-  if (typeof value === 'string') return false
-
-  return value.match(/^\d{2}-\d{2}-\d{4}$/)
 }
