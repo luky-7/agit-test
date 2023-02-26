@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import Select from 'react-select';
 import DateTimePicker from 'react-datetime-picker'
+import { v4 as uuidv4 } from 'uuid';
 
 // declare global variable
 const FIRST_NAME = 'firstname';
@@ -116,6 +117,7 @@ export default function FormUser({ selectedUser, cbSubmit }) {
   }
 
 	const onSubmit = user => {
+    user['id'] = uuidv4()
     user[GROUP_ACCESS] = user[GROUP_ACCESS].value
     user[EXPIRED_DATE] = user[EXPIRED_DATE].toISOString()
 

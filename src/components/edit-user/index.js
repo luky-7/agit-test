@@ -5,15 +5,18 @@ import { editUser } from '../../features/users-slice';
 import { useNavigate, useParams } from 'react-router-dom';
 
 export default function EditUser() {
-  const { idx } = useParams()
+  const { userId } = useParams()
   const navigate = useNavigate()
-  const selectedUser = useSelector(state => state.users.value[idx])
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
+  const selectedUser = useSelector(state => {
+    const idx = state.users.value.findIndex(({id}) => id === userId)
+    return state.users.value[idx]
+  })
 
-  const cbSubmit = (user) => {
+  const cbSubmit = (newData) => {
     dispatch(editUser({
-			user,
-      idx,
+			newData,
+      userId,
 		}));
     
     navigate(-1)

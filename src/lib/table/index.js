@@ -107,7 +107,7 @@ function RenderTable({ columns, data, rowsPerPage = 5, actionHeaders, actionColu
                 {columns.map((column, idxCol) => {
                   return <td key={idxCol}>{row[column.accessor]}</td>
                 })}
-                <td> {actionColumns(idx)} </td>
+                <td> {actionColumns(row.id)} </td>
               </tr>
             )
           })}

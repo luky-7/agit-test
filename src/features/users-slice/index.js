@@ -18,18 +18,23 @@ export const usersSlice = createSlice({
 			return state;
 		},
 		editUser: (state, action) => {
-			const idx = action.payload?.idx;
-			const user = action.payload?.user;
+			const userId = action.payload?.userId;
+			const newData = action.payload?.newData;
 
-			if (state.value[idx] !== null || 'undefined') {
-				state.value[idx] = user
+			const idx = state.value.findIndex(({id}) => id === userId);
+
+			if (idx > -1) {
+				state.value[idx] = newData;
+				
 				return state;
 			};
 		},
 		deleteUser: (state, action) => {
-			const idx = action.payload?.idx;
+			const userId = action.payload?.userId;
 
-			if (state.value[idx] !== null || 'undefined') {
+			const idx = state.value.findIndex(({id}) => id === userId);
+
+			if (idx > -1) {
 				state.value.splice(idx, 1);
 			
 				return state;

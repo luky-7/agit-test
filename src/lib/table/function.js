@@ -1,7 +1,4 @@
 function convertType(value) {
-  console.log('value')
-  console.log(value)
-
   if (typeof value === 'number') {
     return value.toString()
   }
@@ -65,9 +62,6 @@ export function paginateRows(sortedRows, activePage, rowsPerPage) {
 }
 
 function isDateString(value) {
-  console.log('value')
-  console.log(value)
-
   if (typeof value === 'string') return false
 
   return value.match(/^\d{2}-\d{2}-\d{4}$/)

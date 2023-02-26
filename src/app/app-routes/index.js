@@ -13,7 +13,7 @@ export default function AppRoutes() {
 				<Route path='/' element={<Home />} />
 				<Route path='users/' element={<UserList />} />
 				<Route path='add-user' element={<AddUser />} />
-				<Route path='edit-user/:idx' element={<EditUser />} />
+				<Route path='edit-user/:userId' element={<EditUser />} />
 			</Routes>
 		</BrowserRouter>
   );

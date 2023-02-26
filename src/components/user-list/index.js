@@ -12,19 +12,19 @@ function ActionHeaders() {
 	);
 }
 
-function ActionColumns({ idx }) {
+function ActionColumns({ userId }) {
 	const dispatch = useDispatch()
 	
 	const handleDelete = e => {
 		e.preventDefault()
 		dispatch(deleteUser({
-			idx
+			userId
 		}))
 	}
 
 	return (
 		<>
-			<Link to={`/edit-user/${idx}`}>
+			<Link to={`/edit-user/${userId}`}>
 				<button>
 					edit
 				</button>
@@ -40,7 +40,7 @@ export default function UserList() {
 	// get dataTable from global state
 	const dataTable = useSelector(state => state.users.value)
 
-	// declare headers table for react-table
+	// declare headers table
 	const headersTable = [
 		{
 			label: 'Firstname',
@@ -66,9 +66,9 @@ export default function UserList() {
 			<Table 
 				headersTable={headersTable} 
 				dataTable={dataTable} 
-				rowsPerPage={3}
+				rowsPerPage={2}
 				actionHeaders={() => <ActionHeaders />}
-				actionColumns={(idx) => <ActionColumns idx={idx} />} />
+				actionColumns={(userId) => <ActionColumns userId={userId} />} />
 		</div>
 	);
 }
