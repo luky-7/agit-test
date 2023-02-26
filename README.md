@@ -59,22 +59,22 @@
   ```
   
  * react-datetime-picker v4.2.0 <br />
-  Docs
-  ```sh
-  https://github.com/wojtekmaj/react-datetime-picker#readme
-  ```
+   Docs
+   ```sh
+   https://github.com/wojtekmaj/react-datetime-picker#readme
+   ```
   
  * react-select v5.7.0 <br />
-  Docs
-  ```sh
-  https://react-select.com/home
-  ```
+   Docs
+   ```sh
+   https://react-select.com/home
+   ```
   
  * uuid v9.0.0 <br />
-  Docs
-  ```sh
-  https://github.com/uuidjs/uuid#readme
-  ```
+   Docs
+   ```sh
+   https://github.com/uuidjs/uuid#readme
+   ```
   
 ### Development
 * Github <br />
