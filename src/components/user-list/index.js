@@ -67,8 +67,8 @@ export default function UserList() {
 				headersTable={headersTable} 
 				dataTable={dataTable} 
 				rowsPerPage={2}
-				actionHeaders={() => <ActionHeaders />}
-				actionColumns={(userId) => <ActionColumns userId={userId} />} />
+				additionalHeader={() => <ActionHeaders />}
+				additionalColumn={(userId) => <ActionColumns userId={userId} />} />
 		</div>
 	);
 }

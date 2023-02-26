@@ -2,7 +2,7 @@ import React, { useMemo, useState } from 'react';
 import Pagination from './pagination';
 import  { filterRows, sortRows, paginateRows } from './function'
 
-function RenderTable({ columns, data, rowsPerPage = 5, actionHeaders, actionColumns }) {
+function RenderTable({ columns, data, rowsPerPage = 5, additionalHeader, additionalColumn }) {
   const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' });
   const [activePage, setActivePage] = useState(1);
   const [filters, setFilters] = useState({});
@@ -56,7 +56,7 @@ function RenderTable({ columns, data, rowsPerPage = 5, actionHeaders, actionColu
                     </th>
                   )
                 })}
-                <th>{actionHeaders()}</th>
+                <th>{additionalHeader()}</th>
               </tr>
 
               {/* filter column */}
@@ -107,7 +107,7 @@ function RenderTable({ columns, data, rowsPerPage = 5, actionHeaders, actionColu
                 {columns.map((column, idxCol) => {
                   return <td key={idxCol}>{row[column.accessor]}</td>
                 })}
-                <td> {actionColumns(row.id)} </td>
+                <td> {additionalColumn(row.id)} </td>
               </tr>
             )
           })}
@@ -125,7 +125,13 @@ function RenderTable({ columns, data, rowsPerPage = 5, actionHeaders, actionColu
   );
 }
 
-export default function Table({ headersTable, dataTable, rowsPerPage, actionHeaders, actionColumns }) {
+export default function Table({ 
+    headersTable, 
+    dataTable, 
+    rowsPerPage, 
+    additionalHeader, 
+    additionalColumn 
+  }) {
   // useMemo with depedency [], to ensure headers isn't recreated on every render
   // don't make many proccess, cause the function passed to useMemo runs during rendering
   const columns = useMemo(() => headersTable, [])
@@ -138,6 +144,6 @@ export default function Table({ headersTable, dataTable, rowsPerPage, actionHead
     columns={columns} 
     data={data} 
     rowsPerPage={rowsPerPage}
-    actionHeaders={actionHeaders} 
-    actionColumns={actionColumns} />
+    additionalHeader={additionalHeader} 
+    additionalColumn={additionalColumn} />
 }
