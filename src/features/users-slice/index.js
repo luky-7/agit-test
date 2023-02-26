@@ -21,7 +21,7 @@ export const usersSlice = createSlice({
 			const idx = action.payload?.idx;
 			const user = action.payload?.user;
 
-			if (state.value[idx] !== undefined) {
+			if (state.value[idx] !== null || 'undefined') {
 				state.value[idx] = user
 				return state;
 			};
@@ -29,7 +29,7 @@ export const usersSlice = createSlice({
 		deleteUser: (state, action) => {
 			const idx = action.payload?.idx;
 
-			if (state.value[idx] !== undefined) {
+			if (state.value[idx] !== null || 'undefined') {
 				state.value.splice(idx, 1);
 			
 				return state;

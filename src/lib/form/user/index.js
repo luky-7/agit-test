@@ -117,7 +117,7 @@ export default function FormUser({ selectedUser, cbSubmit }) {
 
 	const onSubmit = user => {
     user[GROUP_ACCESS] = user[GROUP_ACCESS].value
-    user[EXPIRED_DATE] = user[EXPIRED_DATE].toString()
+    user[EXPIRED_DATE] = user[EXPIRED_DATE].toISOString()
 
 		cbSubmit(user);
 	}

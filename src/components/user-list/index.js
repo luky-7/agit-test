@@ -4,7 +4,15 @@ import { Link} from 'react-router-dom';
 import { deleteUser } from '../../features/users-slice';
 import Table from '../../lib/table';
 
-function Action({ idx }) {
+function ActionHeaders() {
+	return (
+		<>
+			Actions
+		</>
+	);
+}
+
+function ActionColumns({ idx }) {
 	const dispatch = useDispatch()
 	
 	const handleDelete = e => {
@@ -15,7 +23,7 @@ function Action({ idx }) {
 	}
 
 	return (
-		<div>
+		<>
 			<Link to={`/edit-user/${idx}`}>
 				<button>
 					edit
@@ -24,43 +32,29 @@ function Action({ idx }) {
 			<button onClick={handleDelete}>
 				Delete
 			</button>  
-		</div>
+		</>
 	);
 }
 
 export default function UserList() {
 	// get dataTable from global state
-	let dataTable = useSelector(state => state.users.value)
+	const dataTable = useSelector(state => state.users.value)
 
 	// declare headers table for react-table
 	const headersTable = [
 		{
-			Header: 'Firstname',
+			label: 'Firstname',
 			accessor: 'firstname',
 		},
 		{
-			Header: 'Lastname',
+			label: 'Lastname',
 			accessor: 'lastname',
 		},
 		{
-			Header: 'Expired Date',
-			accessor: 'expiredDate',
-		},
-		{
-			Header: 'Group Access',
+			label: 'Group Access',
 			accessor: 'groupAccess',
-		},
-		{
-			Header: 'Action',
-			accessor: 'action',
-		},
+		}
 	]
-
-	dataTable = dataTable?.map((el, idx) => ({
-		...el,
-		// add action property for edit and delete
-		action: <Action idx={idx} />
-	}))
 
 	return (
 		<div>
@@ -69,7 +63,12 @@ export default function UserList() {
 					Add User 
 				</button>
 			</Link>
-			<Table headersTable={headersTable} dataTable={dataTable} />
+			<Table 
+				headersTable={headersTable} 
+				dataTable={dataTable} 
+				rowsPerPage={3}
+				actionHeaders={() => <ActionHeaders />}
+				actionColumns={(idx) => <ActionColumns idx={idx} />} />
 		</div>
 	);
 }

@@ -1,4 +1,7 @@
 function convertType(value) {
+  console.log('value')
+  console.log(value)
+
   if (typeof value === 'number') {
     return value.toString()
   }
@@ -39,12 +42,12 @@ export function filterRows(rows, filters) {
   })
 }
 
-function sortRows(rows, sort) {
+export function sortRows(rows, sort) {
   return rows.sort((a, b) => {
     const { order, orderBy } = sort
 
-    if (a[orderBy] === null || undefined) return 1
-    if (b[orderBy] === null || undefined) return -1
+    if (typeof a[orderBy] === null || 'undefined') return 1
+    if (typeof b[orderBy] === null || 'undefined') return -1
 
     const aLocale = convertType(a[orderBy])
     const bLocale = convertType(b[orderBy])
@@ -57,7 +60,14 @@ function sortRows(rows, sort) {
   })
 }
 
+export function paginateRows(sortedRows, activePage, rowsPerPage) {
+  return [...sortedRows].slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage)
+}
+
 function isDateString(value) {
+  console.log('value')
+  console.log(value)
+
   if (typeof value === 'string') return false
 
   return value.match(/^\d{2}-\d{2}-\d{4}$/)

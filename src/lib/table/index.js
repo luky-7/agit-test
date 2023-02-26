@@ -1,23 +1,16 @@
 import React, { useMemo, useState } from 'react';
-import { useTable } from 'react-table';
 import Pagination from './pagination';
-import  { filterRows } from './function'
+import  { filterRows, sortRows, paginateRows } from './function'
 
-function RenderTable({ columns, data }) {
+function RenderTable({ columns, data, rowsPerPage = 5, actionHeaders, actionColumns }) {
   const [sort, setSort] = useState({ order: 'asc', orderBy: 'id' });
   const [activePage, setActivePage] = useState(1);
   const [filters, setFilters] = useState({});
-  
 
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    rows,
-    prepareRow,
-  } = useTable({ columns, data });
-
-  const handleSearch = (value, accessor) => {
+  const handleSearch = (e, column) => {
+    const value = e.target.value
+    const accessor = column.accessor
+    
     setActivePage(1)
   
     if (value) {
@@ -43,38 +36,32 @@ function RenderTable({ columns, data }) {
     }))
   }
 
-  const filteredRows = filterRows(rows, filters);
-  const rowsPerPage = 2;
-  const calculatedRows = filteredRows.slice((activePage - 1) * rowsPerPage, activePage * rowsPerPage);
+  const filteredRows = useMemo(() => filterRows(data, filters), [data, filters]);
+  const sortedRows = useMemo(() => sortRows(filteredRows, sort), [filteredRows, sort]);
+  const calculatedRows = paginateRows(sortedRows, activePage, rowsPerPage);
   const count = filteredRows.length;
   const totalPages = Math.ceil(count / rowsPerPage);
 
   return (
     <>
-      <table {...getTableProps()} style={{ border: 'solid 1px blue' }}>
+      <table>
         <thead>
-          {headerGroups.map((headerGroup, idx) => (
             <>
-              <tr {...headerGroup.getHeaderGroupProps()} key={idx}>
-                {headerGroup.headers.map((column, idxColumn) => (
-                  <th
-                    {...column.getHeaderProps()}
-                    style={{
-                      borderBottom: 'solid 3px red',
-                      background: 'aliceblue',
-                      color: 'black',
-                      fontWeight: 'bold',
-                    }}
-                    key={idxColumn}
-                  >
-                    {column.render('Header')}
-                  </th>
-                ))}
+              {/* title header */}
+              <tr>
+                {columns?.map((column, idx) => {
+                  return (
+                    <th key={idx}>
+                      {column.label}
+                    </th>
+                  )
+                })}
+                <th>{actionHeaders()}</th>
               </tr>
 
               {/* filter column */}
               <tr>
-                {columns.map((column, idx) => {
+                {columns?.map((column, idx) => {
                   return (
                     <th key={idx}>
                       <input
@@ -82,7 +69,7 @@ function RenderTable({ columns, data }) {
                         type="search"
                         placeholder={`Search ${column.label}`}
                         value={filters[column.accessor]}
-                        onChange={event => handleSearch(event.target.value, column.accessor)}
+                        onChange={event => handleSearch(event, column)}
                       />
                     </th>
                   )
@@ -91,50 +78,36 @@ function RenderTable({ columns, data }) {
 
               {/* sort */}
               <tr>
-                {columns.map(column => {
+                {columns.map((column, idx) => {
                   const sortIcon = () => {
                     if (column.accessor === sort.orderBy) {
                       if (sort.order === 'asc') {
-                        return '⬆️'
+                        return '↑'
                       }
-                      return '⬇️'
+                      return '↓'
                     } else {
-                      return '️↕️'
+                      return '️↕'
                     }
                   }
 
                   return (
-                    <th key={column.accessor}>
-                      <span>{column.label}</span>
+                    <th key={idx}>
                       <button onClick={() => handleSort(column.accessor)}>{sortIcon()}</button>
                     </th>
                   )
                 })}
               </tr>
-            </>            
-          ))}
+            </>
         </thead>
         
-        <tbody {...getTableBodyProps()}>
-          {rows.map((row, idx) => {
-            prepareRow(row)
+        <tbody>
+          {calculatedRows?.map((row, idx) => {
             return (
-              <tr {...row.getRowProps()} key={idx}>
-                {row.cells.map((cell, idxCell) => {
-                  return (
-                    <td
-                      {...cell.getCellProps()}
-                      style={{
-                        padding: '10px',
-                        border: 'solid 1px gray',
-                        background: 'papayawhip',
-                      }}
-                      key={idxCell}
-                    >
-                      {cell.render('Cell')}
-                    </td>
-                  )
+              <tr key={idx}>
+                {columns.map((column, idxCol) => {
+                  return <td key={idxCol}>{row[column.accessor]}</td>
                 })}
+                <td> {actionColumns(idx)} </td>
               </tr>
             )
           })}
@@ -152,7 +125,7 @@ function RenderTable({ columns, data }) {
   );
 }
 
-export default function Table({ headersTable, dataTable }) {
+export default function Table({ headersTable, dataTable, rowsPerPage, actionHeaders, actionColumns }) {
   // useMemo with depedency [], to ensure headers isn't recreated on every render
   // don't make many proccess, cause the function passed to useMemo runs during rendering
   const columns = useMemo(() => headersTable, [])
@@ -161,5 +134,10 @@ export default function Table({ headersTable, dataTable }) {
   // only recreated in render phase, if data has changed
   const data = useMemo(() => dataTable, [dataTable])
 
-  return <RenderTable columns={columns} data={data} />
+  return <RenderTable 
+    columns={columns} 
+    data={data} 
+    rowsPerPage={rowsPerPage}
+    actionHeaders={actionHeaders} 
+    actionColumns={actionColumns} />
 }
