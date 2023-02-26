@@ -76,6 +76,51 @@
    https://github.com/uuidjs/uuid#readme
    ```
   
+### Structures
+* app directory <br />
+ Route Initation
+  ```sh
+  app/app-routes
+  ```
+  
+  Redux Store
+  ```sh
+  app/store.js
+  ```
+ 
+* components directory <br />
+  Add User Page
+  ```sh
+  components/add-user
+  ```
+  
+  Edit User Page
+  ```sh
+  components/edit-user
+  ```
+  
+  User List Page
+  ```sh
+  components/user-list
+  ```
+  
+* features directory <br />
+  Users's Redux Actions and Reducers
+  ```sh
+  features/users-slice
+  ```
+  
+* lib directory <br />
+  Form User
+  ```sh
+  lib/form/user
+  ```
+  
+  Table
+  ```sh
+  lib/table
+  ```
+  
 ### Development
 * Github <br />
   Clone Repository
