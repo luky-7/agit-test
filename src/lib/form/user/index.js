@@ -135,97 +135,137 @@ export default function FormUser({ selectedUser, cbSubmit }) {
   const defaultValues = parsingDefaultValues(selectedUser);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit, onErrors)}>
-        <label htmlFor={FIRST_NAME}>
-          First Name
-        </label>
-        <input
-          id={FIRST_NAME}
-          type='text'
-          defaultValue={defaultValues[FIRST_NAME]}
-          {...register(FIRST_NAME, registerOptions[FIRST_NAME])} />
-          <span>{errors[FIRST_NAME] && errors[FIRST_NAME].message}</span>
+    <div className='h-screen'>
+      <form className='rounded overflow shadow-md py-3 px-10 mx-auto mt-5' 
+        onSubmit={handleSubmit(onSubmit, onErrors)}>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={FIRST_NAME}>
+            First Name
+          </label>
+          <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id={FIRST_NAME}
+            type='text'
+            defaultValue={defaultValues[FIRST_NAME]}
+            {...register(FIRST_NAME, registerOptions[FIRST_NAME])} />
+          <p className='text-red-500 text-xs italic'>
+            {errors[FIRST_NAME] && errors[FIRST_NAME].message}
+          </p>
+        </div>
 
-        <label htmlFor={LAST_NAME}>
-          Last Name
-        </label>
-        <input
-          id={LAST_NAME}
-          type='text'
-          defaultValue={defaultValues[LAST_NAME]}
-          {...register(LAST_NAME, registerOptions[LAST_NAME])} />
-          <span>{errors[LAST_NAME] && errors[LAST_NAME].message}</span>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={LAST_NAME}>
+            Last Name
+          </label>
+          <input
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id={LAST_NAME}
+            type='text'
+            defaultValue={defaultValues[LAST_NAME]}
+            {...register(LAST_NAME, registerOptions[LAST_NAME])} />
+          <p className='text-red-500 text-xs italic'>
+            {errors[LAST_NAME] && errors[LAST_NAME].message}
+          </p>
+        </div>  
         
-        <label htmlFor={EMAIL}>
-          Email
-        </label>
-        <input 
-          id={EMAIL}
-          type='email'
-          defaultValue={defaultValues[EMAIL]}
-          {...register(EMAIL, registerOptions[EMAIL])} />
-          <span>{errors[EMAIL] && errors[EMAIL].message}</span>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={EMAIL}>
+            Email
+          </label>
+          <input 
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id={EMAIL}
+            type='email'
+            defaultValue={defaultValues[EMAIL]}
+            {...register(EMAIL, registerOptions[EMAIL])} />
+          <p className='text-red-500 text-xs italic'>
+            {errors[EMAIL] && errors[EMAIL].message}
+          </p>
+        </div>
 
-        <label htmlFor={PASSWORD}>
-          Password
-        </label>
-        <input 
-          id={PASSWORD}
-          type='password'
-          defaultValue={defaultValues[PASSWORD]}
-          {...register(PASSWORD, registerOptions[PASSWORD])} />
-          <span>{errors[PASSWORD] && errors[PASSWORD].message}</span>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={PASSWORD}>
+            Password
+          </label>
+          <input 
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id={PASSWORD}
+            type='password'
+            defaultValue={defaultValues[PASSWORD]}
+            {...register(PASSWORD, registerOptions[PASSWORD])} />
+          <p className='text-red-500 text-xs italic'>
+            {errors[PASSWORD] && errors[PASSWORD].message}
+          </p>
+        </div>
+
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={CONFIRM_PASSWORD}>
+            Confirm Password
+          </label>
+          <input 
+            className='shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
+            id={CONFIRM_PASSWORD}
+            type='password'
+            defaultValue={defaultValues[CONFIRM_PASSWORD]}
+            {...register(CONFIRM_PASSWORD, registerOptions[CONFIRM_PASSWORD])} />
+          <p className='text-red-500 text-xs italic'>
+            {errors[CONFIRM_PASSWORD] && errors[CONFIRM_PASSWORD].message}
+          </p>
+        </div>
         
-        <label htmlFor={CONFIRM_PASSWORD}>
-          Confirm Password
-        </label>
+        <div className='mb-4'>
+          <label className='block text-gray-700 text-sm font-bold mb-2' htmlFor={EXPIRED_DATE}>
+            Expired Date
+          </label>
+          {/* If component doesn't expose input ref, 
+          then use Controller to take care of the registration process */}
+          <Controller
+            name={EXPIRED_DATE}
+            control={control}
+            rules={registerOptions[EXPIRED_DATE]}
+            defaultValue={defaultValues[EXPIRED_DATE]}
+            render={({ field }) => {
+              return (
+                <DateTimePicker
+                  {...field}
+                  minDate={today} />
+              )}
+            }
+          />
+          <p className='text-red-500 text-xs italic'>
+            {errors[EXPIRED_DATE] && errors[EXPIRED_DATE].message}
+          </p>
+        </div>
+
+        <div className='mb-4'>
+          {/* If component doesn't expose input ref, 
+          then use Controller to take care of the registration process */}
+          <Controller
+            name={GROUP_ACCESS}
+            control={control}
+            rules={registerOptions[GROUP_ACCESS]}
+            defaultValue={defaultValues[GROUP_ACCESS]}
+            render={({ field }) => {
+              return (
+                <Select 
+                  {...field} 
+                  options={groupAccess} />
+              )}
+            }
+          />
+          <p className='text-red-500 text-xs italic'>
+            {errors[GROUP_ACCESS] && errors[GROUP_ACCESS].message}
+          </p>
+        </div>
+
+        <button 
+          className='bg-white hover:bg-gray-100 text-gray-800 font-normal ml-1 py-1 px-4 border border-gray-400 rounded shadow'
+          onClick={handleCancel}> 
+          Cancel 
+        </button>
         <input 
-          id={CONFIRM_PASSWORD}
-          type='password'
-          defaultValue={defaultValues[CONFIRM_PASSWORD]}
-          {...register(CONFIRM_PASSWORD, registerOptions[CONFIRM_PASSWORD])} />
-          <span>{errors[CONFIRM_PASSWORD] && errors[CONFIRM_PASSWORD].message}</span>
-
-        <label htmlFor={EXPIRED_DATE}>
-          Expired Date
-        </label>
-        {/* If component doesn't expose input ref, 
-        then use Controller to take care of the registration process */}
-        <Controller
-          name={EXPIRED_DATE}
-          control={control}
-          rules={registerOptions[EXPIRED_DATE]}
-          defaultValue={defaultValues[EXPIRED_DATE]}
-          render={({ field }) => {
-            return (
-              <DateTimePicker
-                {...field}
-                minDate={today} />
-            )}
-          }
-        />
-        <span>{errors[EXPIRED_DATE] && errors[EXPIRED_DATE].message}</span>
-
-        {/* If component doesn't expose input ref, 
-        then use Controller to take care of the registration process */}
-        <Controller
-          name={GROUP_ACCESS}
-          control={control}
-          rules={registerOptions[GROUP_ACCESS]}
-          defaultValue={defaultValues[GROUP_ACCESS]}
-          render={({ field }) => {
-            return (
-              <Select 
-                {...field} 
-                options={groupAccess} />
-            )}
-          }
-        />
-        <span>{errors[GROUP_ACCESS] && errors[GROUP_ACCESS].message}</span>
-
-        <button onClick={handleCancel}> Cancel </button>
-        <input type='submit' />        
+          className='bg-blue-500 hover:bg-blue-700 text-white font-bold my-3 ml-1 py-1 px-4 rounded'
+          type='submit' />        
       </form>
     </div>
   );

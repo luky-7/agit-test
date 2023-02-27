@@ -27,27 +27,31 @@ export default function Pagination({
 	};
 
 	return (
-		<>
-      <div className="">
-        <button disabled={activePage === 1} onClick={handleFirstPage}>
+		<div className='text-end mt-5'>
+      <div className="inline-block">
+        <button className='bg-white hover:bg-gray-100 text-gray-800 font-normal ml-1 py-0 px-2 border border-gray-400 rounded shadow' 
+						disabled={activePage === 1} onClick={handleFirstPage}>
 					{'<< First'}
         </button>
-        <button disabled={activePage === 1} onClick={handlePrevPage}>
+        <button className='bg-white hover:bg-gray-100 text-gray-800 font-normal ml-1 py-0 px-2 border border-gray-400 rounded shadow' 
+				disabled={activePage === 1} onClick={handlePrevPage}>
 					{'< Previous'}
         </button>
-        <button disabled={activePage === totalPages} onClick={handleNextPage}>
+        <button className='bg-white hover:bg-gray-100 text-gray-800 font-normal ml-1 py-0 px-2 border border-gray-400 rounded shadow' 
+				disabled={activePage === totalPages} onClick={handleNextPage}>
 					{'Next >'}
         </button>
-        <button disabled={activePage === totalPages} onClick={handleLastPage}>
+        <button className='bg-white hover:bg-gray-100 text-gray-800 font-normal ml-1 py-0 px-2 border border-gray-400 rounded shadow' 
+				disabled={activePage === totalPages} onClick={handleLastPage}>
 					{'Last >>'}
         </button>
       </div>
-      <p>
+      <p className='text-sm'>
         Page {activePage} of {totalPages}
       </p>
-      <p>
+      <p className='text-sm'>
         Rows: {beginning === end ? end : `${beginning} - ${end}`} of {count}
       </p>
-    </>
+    </div>
   );
 }

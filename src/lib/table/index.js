@@ -43,28 +43,29 @@ function RenderTable({ columns, data, rowsPerPage = 5, additionalHeader, additio
   const totalPages = Math.ceil(count / rowsPerPage);
 
   return (
-    <>
-      <table>
+    <div className='inline-block w-full overflow-x-auto'>
+      <table className='items-start bg-transparent w-full border-collapse'>
         <thead>
             <>
               {/* title header */}
               <tr>
                 {columns?.map((column, idx) => {
                   return (
-                    <th key={idx}>
+                    <th className='text-start font-normal' key={idx}>
                       {column.label}
                     </th>
                   )
                 })}
-                <th>{additionalHeader()}</th>
+                <th className='text-start font-normal'>{additionalHeader()}</th>
               </tr>
 
               {/* filter column */}
               <tr>
                 {columns?.map((column, idx) => {
                   return (
-                    <th key={idx}>
+                    <th className='text-start font-thin' key={idx}>
                       <input
+                        className='font-thin shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline'
                         key={`${column.accessor}-search`}
                         type="search"
                         placeholder={`Search ${column.label}`}
@@ -91,7 +92,7 @@ function RenderTable({ columns, data, rowsPerPage = 5, additionalHeader, additio
                   }
 
                   return (
-                    <th key={idx}>
+                    <th className='text-start' key={idx}>
                       <button onClick={() => handleSort(column.accessor)}>{sortIcon()}</button>
                     </th>
                   )
@@ -121,7 +122,7 @@ function RenderTable({ columns, data, rowsPerPage = 5, additionalHeader, additio
         totalPages={totalPages}
         setActivePage={setActivePage}
       />
-    </>
+    </div>
   );
 }
 
