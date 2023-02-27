@@ -1,70 +1,140 @@
-# Getting Started with Create React App
+# Getting Started with Agit Test
+ 
+### Prerequisites
+* nvm <br />
+  Install node version manager (nvm):
+  ```sh
+  https://github.com/coreybutler/nvm-windows#readme
+  ```
+  
+  ```sh
+  Click Download Now! button in file README.md
+  ```
+  
+* node js v18.13.0 <br />
+  Install node via installer
+  ```sh
+  https://www.npackd.org/p/org.nodejs.NodeJS64/18.13
+  ```
+  
+  Install node via nvm
+  ```sh
+  $ nvm install 18.13.0
+  ```
+  
+  Use node js v18.13.0
+  ```sh
+  $ nvm use 18.13.0
+  ```
+  
+### Libraries
+* React v18.2.0 <br />
+  Docs
+  ```sh
+  https://reactjs.org/docs/getting-started.html
+  ```
+ 
+* @reduxjs/toolkit v1.9.3 <br />
+  Docs
+  ```sh
+  https://redux-toolkit.js.org/
+  ```
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+* react-redux v8.0.5 <br />
+  Docs
+  ```sh
+  https://react-redux.js.org/
+  ```
 
-## Available Scripts
+* react-router-dom v6.8.1 <br />
+  Docs
+  ```sh
+  https://reactrouter.com/en/main
+  ```
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+* react-hook-form v7.43.2 <br />
+  Docs
+  ```sh
+  https://legacy.react-hook-form.com/
+  ```
+  
+ * react-datetime-picker v4.2.0 <br />
+   Docs
+   ```sh
+   https://github.com/wojtekmaj/react-datetime-picker#readme
+   ```
+  
+ * react-select v5.7.0 <br />
+   Docs
+   ```sh
+   https://react-select.com/home
+   ```
+  
+ * uuid v9.0.0 <br />
+   Docs
+   ```sh
+   https://github.com/uuidjs/uuid#readme
+   ```
+  
+### Structures
+* app directory <br />
+ Route Initiation
+  ```sh
+  app/app-routes
+  ```
+  
+  Redux Store
+  ```sh
+  app/store.js
+  ```
+ 
+* components directory <br />
+  Add User Page
+  ```sh
+  components/add-user
+  ```
+  
+  Edit User Page
+  ```sh
+  components/edit-user
+  ```
+  
+  User List Page
+  ```sh
+  components/user-list
+  ```
+  
+* features directory <br />
+  Users's Redux Actions and Reducers
+  ```sh
+  features/users-slice
+  ```
+  
+* lib directory <br />
+  Form User
+  ```sh
+  lib/form/user
+  ```
+  
+  Table
+  ```sh
+  lib/table
+  ```
+  
+### Development
+* Github <br />
+  Clone Repository
+  ```sh
+  $ git clone https://github.com/luky-7/agit-test.git
+  ```
+ 
+* Running on Development <br />
+  Install Node Modules
+  ```sh
+  $ npm install
+  ```
+  
+  Start development
+  ```sh
+  $ npm start
+  ```
