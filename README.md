@@ -75,6 +75,12 @@
    ```sh
    https://github.com/uuidjs/uuid#readme
    ```
+   
+ * tailwindcss v3.2.7 <br />
+   Docs
+   ```sh
+   https://tailwindcss.com/docs/installation
+   ```
   
 ### Structures
 * app directory <br />
